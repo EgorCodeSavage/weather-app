@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 60px 0;
+    position: relative;
+    .navbar_logo {
+        display: flex;
+        align-items: center;
+        img {
+            position: absolute;
+            top: -15px;
+            left: -60px;
+            height: 55px;
+            width: 55px;
+        }
+        .weather_nav_title {
+            font-size: 69px;
+        }
+        .weather_nav_time {
+            position: absolute;
+            top: 90px;
+            left: 320px;
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+    }
+    .weather_nav_items {
+        display: flex;
+        flex-wrap: wrap;
+        div {
+            margin-right: 80px;
+            padding: 0 20px 6px;
+
+            font-size: 20px;
+            font-weight: 200;
+        } & div:last-child {
+            margin-right: 0;
+        } & .is_active {
+            border-bottom: 3px solid #695D5D;
+            font-weight: 700;
+        }
+    }
+}
