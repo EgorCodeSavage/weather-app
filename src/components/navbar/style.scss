@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px 60px 0;
+    margin-bottom: 100px;
     position: relative;
     .navbar_logo {
         display: flex;
@@ -35,6 +36,8 @@
 
             font-size: 20px;
             font-weight: 200;
+
+            cursor: pointer;
         } & div:last-child {
             margin-right: 0;
         } & .is_active {
