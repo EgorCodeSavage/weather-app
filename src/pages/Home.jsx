@@ -6,7 +6,7 @@ const Home = () => {
         <div className="container">
             <NavBar />
             <WeatherInner />
-            <div className="weather_hours"></div>
+            {/* <div className="weather_hours"></div> */}
         </div>
      );
 }
