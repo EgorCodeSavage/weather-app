@@ -5,14 +5,9 @@ import temperatureLogo from "./../../img/temperature.png"
 import weather05 from "./../../img/weather05.png"
 import weather02 from "./../../img/weather02.png"
 
-import searchLocation from "./../../img/search_location.png"
 import { cities } from "../../helpers/countryList"
 
 import { useEffect, useState } from "react"
-
-
-
-
 
 const WeatherInner = () => {
 
@@ -22,39 +17,52 @@ const WeatherInner = () => {
     const [main, setMain] = useState([]);
     const [wind, setWind] = useState([]);
 
-
-
-
-    
+    const [currentValue, setCurrentValue] = useState('');
+    const [cordinate, setCordinate] = useState('');
 
     useEffect(() => {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?${cities[0].cordinates}&appid=${myKey}&units=metric`).then(res => res.json()).then(json => {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?${cordinate === '' ? "lat=53.429&lon=14.553" : cordinate}&appid=${myKey}&units=metric`).then(res => res.json()).then(json => {
             setInfo(json)
-            setWeathers(json.weather)
+            setWeathers(json.weather[0].main)
             setMain(json.main)
             setWind(json.wind)
         }).catch(err => {
             console.log(err);
             alert("Ошибка при загрузке данных!")
         })
-    }, [])
+    }, [cordinate])
 
-    console.log(weathers);
+    const weatherIcon = () => {
+        if (weathers === "Clear") {
+            return weather05
+        } else if (weathers === "Clouds") {
+            return weather02
+        }
+    }
+    
+    const getCurrentValue = (event) => {
+        setCurrentValue(event.target.value)
+    }
 
-
-
+    const onClickValue = () => {
+        cities.forEach(obj => {
+            currentValue.toLocaleLowerCase() === obj.city.toLocaleLowerCase() && (
+                setCordinate(obj.cordinates)
+            )
+        });
+    }
     return ( 
         <div className="weather_inner_container">
             <div className="weather_inner_search">
-                <input type="text" placeholder="Search location..." />
-                <img src={searchLocation} alt="search_location" />
+                <input value={currentValue} onChange={getCurrentValue} type="text" placeholder="Search location..." />
+                <button onClick={onClickValue} className="search_button">Search</button>
             </div>
             <div className="weather_inner_info">
                 <div className="weather_inner_location">{info.name}<img src={locationLogo} alt="location"/></div>
                 <div className="weather_inner_weather">
                     <img src={temperatureLogo} alt="temperature" />
                     <div className="current_temp"><span>{Math.round(main.temp)}</span>°C</div>
-                    <img src={weather05} alt="" />   {/*    ДОДЕЛАТЬ КАРТИНКУ ПО ПОГОДЕ     */}
+                    <img src={weatherIcon()} alt="" />
                 </div>
                 <div className="weather_inner_date"></div>
                 <div className="weather_inner_stats">
@@ -72,7 +80,7 @@ const WeatherInner = () => {
                     </div>
                     <div className="stat04">
                         <div className="title">WIND</div>
-                        <div>{wind.speed}mph</div>
+                        <div>{wind.speed}m/s</div>
                     </div>
                 </div>
             </div>
