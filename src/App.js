@@ -15,6 +15,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/weather-app" element={<Home />} />
+            
           </Routes>
         </Router>
     

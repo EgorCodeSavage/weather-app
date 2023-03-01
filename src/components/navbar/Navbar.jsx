@@ -13,7 +13,12 @@ const NavBar = () => {
         const data = new Date()
         let hours = data.getHours();
         let minutes = data.getMinutes();
-        setTime(`${hours}:${minutes}`)
+        if (minutes < 10) {
+            setTime(`${hours}:0${minutes}`)
+        } else {
+            setTime(`${hours}:${minutes}`)
+        }
+        
     });
    
     return ( 
@@ -26,7 +31,9 @@ const NavBar = () => {
                 <div className="weather_nav_time">{time}<span> pm</span></div>
             </div>
             <div className="weather_nav_items">
-                <div className="is_active">Today</div>
+                <NavLink to="/weather-app" className='nav_link'>
+                    <div className="is_active">Today</div>
+                </NavLink>
                 <div className="">16 days Forecast</div>
                 <div className="">Monthlu Forecast</div>
             </div>

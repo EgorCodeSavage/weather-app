@@ -32,6 +32,10 @@
     .weather_nav_items {
         display: flex;
         flex-wrap: wrap;
+        .nav_link {
+            text-decoration: none;
+            color: #ffffff;
+        }
         div {
             margin-right: 80px;
             padding: 0 20px 6px;
@@ -40,6 +44,7 @@
             font-weight: 200;
 
             cursor: pointer;
+
         } & div:last-child {
             margin-right: 0;
         } & .is_active {
