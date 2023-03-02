@@ -1,4 +1,3 @@
-
 import WeatherInner from "../components/weather_inner/WeatherInner";
 
 const Home = () => {
